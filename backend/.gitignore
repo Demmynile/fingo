@@ -1,0 +1,30 @@
+# Ignore migration files
+migrations/
+
+# Ignore Docker Compose file
+docker-compose.yml
+
+# Ignore Go binary files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Ignore logs
+*.log
+
+# Ignore dependency directories
+vendor/
+
+# Ignore Go build outputs
+bin/
+build/
+
+# Ignore IDE/editor specific files
+.vscode/
+.idea/
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
