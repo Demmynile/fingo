@@ -26,3 +26,4 @@ m_down:
 
 sqlc:
 	sqlc generate
+
