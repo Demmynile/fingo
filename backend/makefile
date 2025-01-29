@@ -27,3 +27,9 @@ m_down:
 sqlc:
 	sqlc generate
 
+start:
+	CompileDaemon -command="./fingo"
+
+test:
+	go test -v cover ./...
+

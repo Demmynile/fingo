@@ -1,8 +1,11 @@
 package main
 
-import "fmt"
+import (
+	"github/demmynile/fingo/api"
+)
 
 
 func main (){
-   fmt.Println("Hello  Fingreat")
+   server := api.NewServer(".")
+   server.Start(3000)
 }

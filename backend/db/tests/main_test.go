@@ -3,6 +3,7 @@ package db_test
 import (
 	"database/sql"
 	db "github/demmynile/fingo/db/sqlc"
+	"github/demmynile/fingo/utils"
 	"log"
 	"os"
 	"testing"
@@ -13,9 +14,15 @@ import (
 var testQuery *db.Queries
 
 func TestMain(m *testing.M){
-		conn , err := sql.Open("postgres", "postgres://spicywords:Harbeedeymee_123@localhost:5432/fingreat_db?sslmode=disable")
+
+	    config , err := utils.LoadConfig("../..")
+
+		if err != nil {
+			log.Fatal("Could not load env config")
+		}
+		conn , err := sql.Open(config.DBdriver, config.DB_source)
 		if err != nil{
-			log.Fatal("Could not connect to databae" , err)
+			log.Fatal("Could not connect to database" , err)
 		}
 		testQuery = db.New(conn)
 
