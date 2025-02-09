@@ -2,12 +2,13 @@ package db_test
 
 import (
 	"context"
-	db "github/demmynile/fingo/db/sqlc"
-	"github/demmynile/fingo/utils"
 	"log"
 	"sync"
 	"testing"
 	"time"
+
+	db "github.com/demmynile/fingo/db/sqlc"
+	"github.com/demmynile/fingo/utils"
 
 	_ "github.com/lib/pq" // Use the appropriate driver for your database
 	"github.com/stretchr/testify/assert"

@@ -3,9 +3,10 @@ package api
 import (
 	"database/sql"
 	"fmt"
-	db "github/demmynile/fingo/db/sqlc"
-	"github/demmynile/fingo/utils"
 	"net/http"
+
+	db "github.com/demmynile/fingo/db/sqlc"
+	"github.com/demmynile/fingo/utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -18,10 +19,10 @@ type Server struct {
 
 func NewServer(envPath string) *Server{
 
-	config , err := utils.LoadConfig("../..")
+	config , err := utils.LoadConfig(envPath)
 
 	if err != nil {
-		panic("Could not load env config")
+		panic(fmt.Sprintf("Could not load env config: %v" , err ))
 	}
 
 	conn , err := sql.Open(config.DBdriver, config.DB_source)

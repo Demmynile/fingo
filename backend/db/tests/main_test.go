@@ -2,11 +2,12 @@ package db_test
 
 import (
 	"database/sql"
-	db "github/demmynile/fingo/db/sqlc"
-	"github/demmynile/fingo/utils"
 	"log"
 	"os"
 	"testing"
+
+	db "github.com/demmynile/fingo/db/sqlc"
+	"github.com/demmynile/fingo/utils"
 
 	_ "github.com/lib/pq"
 )
