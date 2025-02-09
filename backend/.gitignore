@@ -24,6 +24,7 @@ build/
 # Ignore IDE/editor specific files
 .vscode/
 .idea/
+.env
 
 # Ignore OS generated files
 .DS_Store
