@@ -7,8 +7,8 @@ import (
 
 	db "github.com/demmynile/fingo/db/sqlc"
 	"github.com/demmynile/fingo/utils"
-
 	"github.com/gin-gonic/gin"
+	_ "github.com/lib/pq"
 )
 
 type Server struct {
@@ -26,6 +26,8 @@ func NewServer(envPath string) *Server{
 	}
 
 	conn , err := sql.Open(config.DBdriver, config.DB_source)
+	fmt.Println("error:", err)
+
 	if err != nil{
 		panic("Could not connect to database")
 	}
