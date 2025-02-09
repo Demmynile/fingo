@@ -2,6 +2,7 @@ package api
 
 import (
 	"database/sql"
+	"fmt"
 	db "github/demmynile/fingo/db/sqlc"
 	"github/demmynile/fingo/utils"
 	"net/http"
@@ -44,6 +45,8 @@ func (s *Server) Start(port int){
 	s.router.GET("/" , func(ctx *gin.Context){
 		ctx.JSON(http.StatusOK , gin.H{"message" : "Welcome to Fingreat"})
 	})
+
+	s.router.Run(fmt.Sprintf(":%v" , port))
 }
 
 

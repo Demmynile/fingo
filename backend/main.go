@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github/demmynile/fingo/api"
+	"github.com/demmynile/fingo/api"
 )
 
 
