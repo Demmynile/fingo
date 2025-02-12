@@ -10,3 +10,12 @@ services:
       - POSTGRES_PASSWORD=Harbeedeymee_123
     ports:
       - '5432:5432'
+
+  postgres-live:
+   container_name: fingreat_postgres_live
+   image: postgres:15-alpine
+   environment:
+      - POSTGRES_USER=spicywords
+      - POSTGRES_PASSWORD=Harbeedeymee_123
+   ports:
+      - '5433:5432'
