@@ -49,6 +49,10 @@ func (s *Server) Start(port int){
 		ctx.JSON(http.StatusOK , gin.H{"message" : "Welcome to Fingreat"})
 	})
 
+	User{}.router(s)
+
+
+
 	s.router.Run(fmt.Sprintf(":%v" , port))
 }
 
