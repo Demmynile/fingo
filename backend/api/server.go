@@ -25,7 +25,7 @@ func NewServer(envPath string) *Server{
 		panic(fmt.Sprintf("Could not load env config: %v" , err ))
 	}
 
-	conn , err := sql.Open(config.DBdriver, config.DB_source)
+	conn , err := sql.Open(config.DBdriver, config.DB_source_live)
 	fmt.Println("error:", err)
 
 	if err != nil{
