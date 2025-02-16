@@ -84,7 +84,7 @@ func (u *User) listUsers(c *gin.Context) {
 		newUsers = append(newUsers , *n )
 	}
 
-	c.JSON(http.StatusOK, newUsers)
+	c.JSON(http.StatusOK, newUsers) 
 }
 
 
