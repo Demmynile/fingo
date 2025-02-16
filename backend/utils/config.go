@@ -7,7 +7,7 @@ type Config struct {
 	DBdriver string `mapstructure:"DB_DRIVER"`
 	DB_source string `mapstructure:"DB_SOURCE"`
 	DB_source_live string `mapstructure:"DB_SOURCE_LIVE"`
-	Signed_key string `mapstructure:"SIGNING_KEY"`
+	Signing_key string `mapstructure:"SIGNING_KEY"`
 }
 
 

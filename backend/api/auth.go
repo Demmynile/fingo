@@ -40,7 +40,7 @@ func (a Auth) login(c *gin.Context){
 		return
 	}
 
-	token , err := utils.CreateToken(dbUser.ID ,  a.server.config.Signed_key)
+	token, err := tokenController.CreateToken(dbUser.ID)
 
 	
 	if err != nil {

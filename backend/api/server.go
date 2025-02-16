@@ -15,7 +15,10 @@ type Server struct {
 	queries *db.Queries
 	router *gin.Engine
 	config *utils.Config
+	
 }
+
+var tokenController *utils.JWTToken
 
 
 func NewServer(envPath string) *Server{
@@ -33,6 +36,8 @@ func NewServer(envPath string) *Server{
 		panic("Could not connect to database")
 	}
 
+	tokenController = utils.NewJWTToken(config)
+
 	q := db.New(conn)
 
 	g := gin.Default()
@@ -41,6 +46,7 @@ func NewServer(envPath string) *Server{
 		queries: q,
 		router: g,
 		config: config,
+		
 	}
 	
 }
