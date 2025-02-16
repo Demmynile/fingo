@@ -20,7 +20,7 @@ type User struct {
 func (u User) router(server *Server){
 	u.server = server
 
-	serverGroup := server.router.Group("/users")
+	serverGroup := server.router.Group("/users" , AuthenticationMiddleware())
 	serverGroup.GET("" , u.listUsers)
 	serverGroup.POST("" , u.createUser)
 }
