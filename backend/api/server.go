@@ -7,6 +7,7 @@ import (
 
 	db "github.com/demmynile/fingo/db/sqlc"
 	"github.com/demmynile/fingo/utils"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	_ "github.com/lib/pq"
 )
@@ -41,6 +42,8 @@ func NewServer(envPath string) *Server{
 	q := db.New(conn)
 
 	g := gin.Default()
+
+	g.Use(cors.Default())
 
 	return &Server{
 		queries: q,
