@@ -9,6 +9,7 @@ import (
 	"github.com/demmynile/fingo/utils"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/golodash/galidator"
 	_ "github.com/lib/pq"
 )
 
@@ -20,6 +21,20 @@ type Server struct {
 }
 
 var tokenController *utils.JWTToken
+
+var gValid = galidator.New().CustomMessages(
+	galidator.Messages{
+		"required": "this field is required",
+	},
+)
+
+func myCorsHandler() gin.HandlerFunc {
+	config := cors.DefaultConfig()
+	config.AllowAllOrigins = true
+	config.AllowHeaders = append(config.AllowHeaders, "Authorization")
+	return cors.New(config)
+}
+
 
 
 func NewServer(envPath string) *Server{
@@ -43,7 +58,7 @@ func NewServer(envPath string) *Server{
 
 	g := gin.Default()
 
-	g.Use(cors.Default())
+	g.Use(myCorsHandler())
 
 	return &Server{
 		queries: q,
@@ -52,6 +67,7 @@ func NewServer(envPath string) *Server{
 		
 	}
 	
+
 }
 
 

@@ -21,7 +21,7 @@ db_down:
 m_up:
 	# run migrate up
 	migrate -path db/migrations -database "postgres://spicywords:Harbeedeymee_123@localhost:5432/fingreat_db?sslmode=disable" up
-	migrate -path db/migrations -database "postgres://spicywords:Harbeedeymee_123@localhost:5433/fingreat_db?sslmode=disable" up
+	# migrate -path db/migrations -database "postgres://spicywords:Harbeedeymee_123@localhost:5433/fingreat_db?sslmode=disable" up
 m_down:
 	# run migrate down
 	migrate -path db/migrations -database "postgres://spicywords:Harbeedeymee_123@localhost:5432/fingreat_db?sslmode=disable" down

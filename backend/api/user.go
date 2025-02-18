@@ -2,6 +2,7 @@ package api
 
 import (
 	"context"
+	"database/sql"
 	"net/http"
 	"time"
 
@@ -23,6 +24,8 @@ func (u User) router(server *Server){
 	serverGroup := server.router.Group("/users" , AuthenticationMiddleware())
 	serverGroup.GET("" , u.listUsers)
 	serverGroup.POST("" , u.createUser)
+	serverGroup.GET("me", u.getLoggedInUser)
+	// serverGroup.PATCH("username", u.updateUsername)
 }
 
 // Corrected UserParams struct
@@ -30,6 +33,8 @@ type UserParams struct {
 	Email    string `json:"email" binding:"required,email"`
 	Password string `json:"password" binding:"required"`
 }
+
+
 func (u *User) createUser(c *gin.Context) {
  	var user UserParams 
 
@@ -86,6 +91,62 @@ func (u *User) listUsers(c *gin.Context) {
 
 	c.JSON(http.StatusOK, newUsers) 
 }
+
+
+func (u *User) getLoggedInUser(c *gin.Context) {
+	userId, err := utils.GetActiveUser(c)
+	if err != nil {
+		return
+	}
+
+	user, err := u.server.queries.GetUserByID(context.Background(), userId)
+
+	if err == sql.ErrNoRows {
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Not authorized to access resources"})
+		return
+	} else if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, UserResponse{}.toUserResponse(&user))
+}
+
+type UpdateUsernameType struct {
+	Username string `json:"username" binding:"required"`
+}
+
+// func (u *User) updateUsername(c *gin.Context) {
+// 	userId, err := utils.GetActiveUser(c)
+// 	if err != nil {
+// 		return
+// 	}
+
+// 	var userInfo UpdateUsernameType
+
+// 	if err := c.ShouldBindJSON(&userInfo); err != nil {
+// 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+// 		return
+// 	}
+
+// 	arg := db.UpdateUsernameParams{
+// 		ID: userId,
+// 		Username: sql.NullString{
+// 			String: userInfo.Username,
+// 			Valid:  true,
+// 		},
+// 		UpdatedAt: time.Now(),
+// 	}
+
+// 	user, err := u.server.queries.UpdateUsername(context.Background(), arg)
+// 	if err != nil {
+// 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+// 		return
+// 	}
+
+// 	c.JSON(http.StatusOK, UserResponse{}.toUserResponse(&user))
+// }
+
 
 
 type UserResponse struct {
